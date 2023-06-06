@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}Reviews{% endblock%}
+
+{% block content %}
+
+    <h1>Filtered Reviews</h1>
+    <form method="GET" action="{% url 'index' %}">
+        <label for="text_prioritize">Prioritize by Text:</label>
+        <select name="text_prioritize" id="text_prioritize">
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+        </select>
+        <br>
+        <label for="minimum_rating">Minimum Rating:</label>
+        <select name="minimum_rating" id="minimum_rating">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        <br>
+        <label for="order_by_rating">Order by Rating:</label>
+        <select name="order_by_rating" id="order_by_rating">
+            <option value="highest">Highest First</option>
+            <option value="lowest">Lowest First</option>
+        </select>
+        <br>
+        <label for="order_by_date">Order by Date:</label>
+        <select name="order_by_date" id="order_by_date">
+            <option value="newest">Newest First</option>
+            <option value="oldest">Oldest First</option>
+        </select>
+        <br>
+        <button type="submit">Filter</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Review Text</th>
+                <th>Rating</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for review in reviews %}
+            <tr>
+                <td>{{ review.reviewText }}</td>
+                <td>{{ review.rating }}</td>
+                <td>{{ review.reviewCreatedOnDate }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock%}
